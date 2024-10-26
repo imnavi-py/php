@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ثبت نام</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="register">
+        <h3>ثبت نام</h3>
+        <form id="registrationForm">
+            <input type="text" name="firstName" placeholder="نام" required>
+            <input type="text" name="lastName" placeholder="نام خانوادگی" required>
+            <input type="text" name="phoneNumber" placeholder="شماره تلفن" required>
+            <input type="email" name="emailAddress" placeholder="ایمیل" required>
+            <input type="text" name="username" placeholder="نام کاربری" required>
+            <input type="password" name="password" placeholder="رمز عبور" required>
+            <button type="submit">ثبت نام</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // جلوگیری از ارسال پیش‌فرض فرم
+
+            const formData = new FormData(this);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+
+            fetch('register.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message); // نمایش پیام موفقیت یا خطا
+                if (data.status === 'success') {
+                    window.location.href = 'index2.html'; // هدایت به صفحه home
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>
