@@ -18,6 +18,14 @@
     </nav>
 </header>
 
+<div class="login">
+    <h3>ورود به حساب کاربری</h3>
+    <input type="text" placeholder="نام کاربری">
+    <input type="password" placeholder="رمز عبور">
+    <button>ورود</button>
+    <button onclick="closeLogin()">بستن</button>
+</div>
+
 <div class="submenu">
     <a href="#">اخبار</a>
     <a href="#">رویدادها</a>
@@ -33,16 +41,10 @@
     </div>
 </div>
 
-<div class="login">
-    <h3>ورود به حساب کاربری</h3>
-    <input type="text" placeholder="نام کاربری">
-    <input type="password" placeholder="رمز عبور">
-    <button>ورود</button>
-    <button onclick="closeLogin()">بستن</button>
-</div>
+
 
 <div class="register">
-    <h3>ثبت نام</h3>
+    <h3>فرم ثبت نام</h3>
     <input type="text" placeholder="نام کاربری">
     <input type="password" placeholder="رمز عبور">
     <button>ثبت نام</button>
@@ -50,6 +52,13 @@
 </div>
 
 <div class="overlay" id="overlay" onclick="closeAll()"></div>
+
+<div class="content">
+    <h2>آخرین اخبار و مطالب</h2>
+    <p>این قسمت می‌تواند شامل بلاگ‌پست‌ها و اخبار جدید باشد.</p>
+    <button onclick="openLogin()">ورود</button>
+    <button onclick="openRegister()">ثبت نام</button>
+</div>
 
 <div class="content">
     <h2>آخرین اخبار و مطالب</h2>
