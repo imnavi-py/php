@@ -8,12 +8,43 @@
 </head>
 <body>
     <div class="login">
-        <h3>ورودبه حساب کاربری</h3>
-        <form action="login.php" method="POST">
-            <input type="email" name="emailAddress" placeholder="ایمیل" required>
+        <h3>ورود به حساب کاربری</h3>
+        <form id="loginForm">
+            <input type="text" name="username" placeholder="نام کاربری" required>
             <input type="password" name="password" placeholder="رمز عبور" required>
             <button type="submit">ورود</button>
         </form>
     </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // جلوگیری از ارسال پیش‌فرض فرم
+
+            const formData = new FormData(this);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+
+            fetch('login.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json', // ارسال داده‌ها به صورت JSON
+                },
+                body: JSON.stringify(data), // تبدیل داده‌ها به JSON
+                
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message); // نمایش پیام موفقیت یا خطا
+                if (data.status === 'success') {
+                    window.location.href = 'home.php'; // هدایت به صفحه home.php
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
 </body>
 </html>

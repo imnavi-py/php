@@ -14,6 +14,7 @@ if ($conn->connect_error) {
 
 // دریافت داده‌های POST از فرم
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // دریافت داده‌ها از JSON
     $data = json_decode(file_get_contents('php://input'), true);
     
     $firstName = $data['firstName'] ?? null;

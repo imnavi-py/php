@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سبد خرید</title>
+    <link rel="stylesheet" href="path/to/your/styles.css">
+</head>
+<body class="bg-gray-100">
+
+    <!-- عنوان صفحه سبد خرید -->
+    <header class="container mx-auto py-6">
+        <h1 class="text-3xl font-bold text-center text-gray-800">سبد خرید شما</h1>
+    </header>
+
+    <!-- نمایش محصولات در سبد خرید -->
+    <section class="container mx-auto py-8">
+        <div id="cart-items" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- آیتم‌های سبد خرید اینجا نمایش داده می‌شوند -->
+        </div>
+    </section>
+
+    <!-- مجموع قیمت و دکمه نهایی کردن خرید -->
+    <div class="container mx-auto py-4 flex justify-between items-center">
+        <span id="total-price" class="text-2xl font-semibold">مجموع: 0 تومان</span>
+        <button class="bg-green-600 text-white py-2 px-4 rounded-md hover:bg-green-700">نهایی کردن خرید</button>
+    </div>
+
+    <script>
+        // دریافت داده‌های سبد خرید از localStorage یا API
+        const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // نمایش محصولات در سبد خرید
+        function displayCartItems() {
+            const cartContainer = document.getElementById('cart-items');
+            cartContainer.innerHTML = ''; // پاک کردن محتوا
+
+            let totalPrice = 0;
+
+            cartItems.forEach(item => {
+                const productCard = document.createElement('div');
+                productCard.classList.add('bg-white', 'shadow-md', 'rounded-lg', 'p-4');
+
+                productCard.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}" class="w-full h-48 object-cover rounded-md">
+                    <h3 class="text-lg font-semibold text-gray-800 mt-4">${item.name}</h3>
+                    <p class="text-gray-500 mt-2">توضیحات کوتاه محصول</p>
+                    <div class="mt-4 flex items-center justify-between">
+                        <span class="text-blue-600 font-bold">${item.price} تومان</span>
+                    </div>
+                    <button onclick="removeFromCart('${item.id}')" class="mt-4 bg-red-600 text-white py-1 px-4 rounded-md hover:bg-red-700 w-full">حذف</button>
+                `;
+                
+                cartContainer.appendChild(productCard);
+                totalPrice += item.price;
+            });
+
+            document.getElementById('total-price').innerText = `مجموع: ${totalPrice} تومان`;
+        }
+
+        // تابع حذف محصول از سبد خرید
+        function removeFromCart(id) {
+            const index = cartItems.findIndex(item => item.id === id);
+            if (index !== -1) {
+                cartItems.splice(index, 1);
+                localStorage.setItem('cart', JSON.stringify(cartItems));
+                displayCartItems();
+            }
+        }
+
+        // اجرای تابع برای نمایش آیتم‌های سبد
+        displayCartItems();
+    </script>
+</body>
+</html>

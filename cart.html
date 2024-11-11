@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سبد خرید</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .card {
+            transition: transform 0.3s ease-in-out;
+        }
+        .card:hover {
+            transform: scale(1.05);
+        }
+        .remove-btn {
+            background-color: #f44336;
+            color: white;
+        }
+        .increase-btn, .decrease-btn {
+            background-color: #2196f3;
+            color: white;
+        }
+        .cart-button:hover, .remove-btn:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div class="container mx-auto py-8">
+        <h2 class="text-4xl font-bold text-center text-gray-800 mb-8">سبد خرید شما</h2>
+
+        <div id="cart-items" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- آیتم‌های سبد خرید در اینجا قرار می‌گیرند -->
+        </div>
+
+        <div class="flex justify-between items-center mt-6">
+            <div class="text-xl font-bold text-gray-800" id="total-price">مجموع: 0 تومان</div>
+            <button class="bg-green-600 text-white py-2 px-6 rounded-md hover:bg-green-700 transition duration-300">ادامه خرید</button>
+        </div>
+    </div>
+
+    <script>
+        // تابع برای نمایش آیتم‌های سبد خرید
+        function displayCartItems() {
+            const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartContainer = document.getElementById('cart-items');
+            cartContainer.innerHTML = ''; // پاک کردن محتوا قبلی
+
+            let totalPrice = 0;
+
+            cartItems.forEach(item => {
+                const productCard = document.createElement('div');
+                productCard.classList.add('card', 'bg-white', 'shadow-lg', 'rounded-lg', 'p-6', 'flex', 'flex-col', 'items-center', 'transition', 'transform');
+
+                productCard.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}" class="w-full h-48 object-cover rounded-md mb-4">
+                    <h3 class="text-xl font-semibold text-gray-800">${item.name}</h3>
+                    <p class="text-gray-500 mt-2">توضیحات کوتاه محصول</p>
+                    <div class="mt-4 flex items-center justify-between w-full">
+                        <span class="text-blue-600 font-bold">${item.price * item.quantity} تومان</span>
+                        <div class="flex items-center gap-2">
+                            <button onclick="increaseQuantity('${item.id}')" class="increase-btn py-1 px-3 rounded-md">+</button>
+                            <span class="text-xl font-semibold">${item.quantity}</span>
+                            <button onclick="decreaseQuantity('${item.id}')" class="decrease-btn py-1 px-3 rounded-md">-</button>
+                        </div>
+                    </div>
+                    <button onclick="removeFromCart('${item.id}')" class="remove-btn mt-4 py-2 px-4 rounded-md w-full transition duration-300 ease-in-out">حذف</button>
+                `;
+                
+                cartContainer.appendChild(productCard);
+                totalPrice += parseInt(item.price) * item.quantity;
+            });
+
+            document.getElementById('total-price').innerText = `مجموع: ${totalPrice} تومان`;
+        }
+
+        // تابع حذف محصول از سبد خرید
+        function removeFromCart(id) {
+            const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+            const index = cartItems.findIndex(item => item.id === id);
+            if (index !== -1) {
+                cartItems.splice(index, 1);
+                localStorage.setItem('cart', JSON.stringify(cartItems));
+                displayCartItems();
+            }
+        }
+
+        // تابع افزایش تعداد محصول
+        function increaseQuantity(id) {
+            const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+            const item = cartItems.find(item => item.id === id);
+            if (item) {
+                item.quantity++;
+                localStorage.setItem('cart', JSON.stringify(cartItems));
+                displayCartItems();
+            }
+        }
+
+        // تابع کاهش تعداد محصول
+        function decreaseQuantity(id) {
+            const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+            const item = cartItems.find(item => item.id === id);
+            if (item && item.quantity > 1) {
+                item.quantity--;
+                localStorage.setItem('cart', JSON.stringify(cartItems));
+                displayCartItems();
+            }
+        }
+
+        // نمایش آیتم‌های سبد خرید هنگام بارگذاری صفحه
+        displayCartItems();
+    </script>
+</body>
+</html>
