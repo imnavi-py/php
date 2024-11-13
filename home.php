@@ -64,6 +64,7 @@ $conn->close();
                 }
                 ?>
             </button>
+<<<<<<< HEAD
             <button class="text-white hover:text-gray-300">
             <?php
                 if ($firstName != '') {
@@ -82,6 +83,10 @@ $conn->close();
                 </button>
                 <span id="cartCount" class="absolute top-0 right-4 bg-red-600 text-white rounded-full text-xs px-2 py-1">0</span> <!-- تعداد محصولات -->
             </div>
+=======
+            <button class="text-white hover:text-gray-300">ثبت‌نام</button>
+            <a href="cart.html" class="text-gray-800 hover:text-blue-600">سبد خرید</a>
+>>>>>>> d9e8c845db35a476a89bacb9eaff621c27c3261f
         </div>
     </div>
 </header>
@@ -180,7 +185,11 @@ $conn->close();
 
 
         // درخواست API برای دریافت داده‌ها
+<<<<<<< HEAD
         fetch('http://localhost/Fixed/api_mobile.php') // آدرس API خود را اینجا وارد کنید
+=======
+        fetch('http://localhost/api_mobile.php') // آدرس API خود را اینجا وارد کنید
+>>>>>>> d9e8c845db35a476a89bacb9eaff621c27c3261f
             .then(response => response.json())
             .then(data => {
                 // فراخوانی تابع برای نمایش داده‌ها

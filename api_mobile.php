@@ -15,6 +15,10 @@ switch ($requestMethod) {
             $result = $conn->query($sql);
             $mobile = $result->fetch_assoc();
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> d9e8c845db35a476a89bacb9eaff621c27c3261f
             echo json_encode($mobile ? $mobile : ["message" => "Mobile not found."]);
         } else {
             // دریافت تمامی موبایل‌ها
