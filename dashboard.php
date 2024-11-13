@@ -30,6 +30,7 @@ $user = $_SESSION['user'];
         <p>کاربر: <?php echo $user['firstName'] . " " . $user['lastName']; ?> | <a href="logout.php" style="color: white;">خروج</a></p>
     </div>
 </header>
+<main>
 
 <div class="submenu">
     <a href="#">اخبار</a>
@@ -50,11 +51,14 @@ $user = $_SESSION['user'];
     <h2>آخرین اخبار و مطالب</h2>
     <p>این قسمت می‌تواند شامل بلاگ‌پست‌ها و اخبار جدید باشد.</p>
 </div>
+</main>
 
 <footer>
     <p>© 2024 تمامی حقوق محفوظ است</p>
     <p><a href="#" style="color: white;">سیاست‌نامه</a> | <a href="#" style="color: white;">شرایط و ضوابط</a></p>
+    <button type="submit"><a href=' home.php'> home</button>
 </footer>
+
 
 <script src="script.js"></script>
 
