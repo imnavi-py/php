@@ -64,7 +64,6 @@ $conn->close();
                 }
                 ?>
             </button>
-<<<<<<< HEAD
             <button class="text-white hover:text-gray-300">
             <?php
                 if ($firstName != '') {
@@ -83,10 +82,6 @@ $conn->close();
                 </button>
                 <span id="cartCount" class="absolute top-0 right-4 bg-red-600 text-white rounded-full text-xs px-2 py-1">0</span> <!-- تعداد محصولات -->
             </div>
-=======
-            <button class="text-white hover:text-gray-300">ثبت‌نام</button>
-            <a href="cart.html" class="text-gray-800 hover:text-blue-600">سبد خرید</a>
->>>>>>> d9e8c845db35a476a89bacb9eaff621c27c3261f
         </div>
     </div>
 </header>
@@ -97,7 +92,7 @@ $conn->close();
             <div class="relative overflow-hidden rounded-lg shadow-lg">
                 <!-- اسلایدر تصاویر -->
                 <div id="slider" class="h-80 bg-blue-300 flex items-center justify-center text-white text-3xl font-bold">
-                    <img id="slide-image" src="assets/images/image1.jpg" alt="پیشنهادات ویژه" class="w-full h-full object-cover rounded-lg">
+                    <img id="slide-image" src="assets/images/1.jpg" alt="پیشنهادات ویژه" class="w-full h-full object-cover rounded-lg">
                 </div>
                 <!-- دکمه‌های اسلایدر -->
                 <button onclick="prevSlide()" class="absolute top-1/2 left-4 bg-blue-500 text-white p-3 rounded-full transform -translate-y-1/2 hover:bg-blue-700">قبلی</button>
@@ -185,11 +180,7 @@ $conn->close();
 
 
         // درخواست API برای دریافت داده‌ها
-<<<<<<< HEAD
-        fetch('http://localhost/Fixed/api_mobile.php') // آدرس API خود را اینجا وارد کنید
-=======
         fetch('http://localhost/api_mobile.php') // آدرس API خود را اینجا وارد کنید
->>>>>>> d9e8c845db35a476a89bacb9eaff621c27c3261f
             .then(response => response.json())
             .then(data => {
                 // فراخوانی تابع برای نمایش داده‌ها
